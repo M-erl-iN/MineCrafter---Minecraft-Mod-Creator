@@ -13,7 +13,20 @@ from os import mkdir
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PIL import Image
 import sys, traceback
-from numba import njit
+
+
+def log_uncaught_exceptions(ex_cls, ex, tb):
+    text = '{}: {}:\n'.format(ex_cls.__name__, ex)
+
+    text += ''.join(traceback.format_tb(tb))
+
+    print(text)
+    QtWidgets.QMessageBox.critical(None, 'Error', text)
+
+    sys.exit()
+
+
+sys.excepthook = log_uncaught_exceptions
 
 
 class Ui_MainWindow1(object):
@@ -21,7 +34,7 @@ class Ui_MainWindow1(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1056, 30, 860, 400)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap('images_for_creator/ore_icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap('images_for_creator/icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -206,7 +219,6 @@ class Ui_MainWindow1(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_16.setFont(font)
-        self.label_16.setStyleSheet("")
         self.label_16.setTextFormat(QtCore.Qt.PlainText)
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
@@ -396,16 +408,16 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
 
     def setName(self):
         self.name = self.lineEdit_2.text()
-        self.lineEdit_2.setText('')
+        self.lineEdit_2.setText('✔')
 
     def setRUname(self):
         self.RUname = self.lineEdit_4.text()
-        self.lineEdit_4.setText('')
+        self.lineEdit_4.setText('✔')
 
     def setMinHeight(self):
         try:
             self.spawn_in_world[0] = str(int(self.lineEdit_7.text()))
-            self.lineEdit_7.setText('')
+            self.lineEdit_7.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                    "images_for_creator/error_icon.png"))
@@ -413,7 +425,7 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
     def setMaxHeight(self):
         try:
             self.spawn_in_world[1] = str(int(self.lineEdit_6.text()))
-            self.lineEdit_6.setText('')
+            self.lineEdit_6.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                     "images_for_creator/error_icon.png"))
@@ -421,7 +433,7 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
     def setMinDrop(self):
         try:
             self.count[0] = str(int(self.lineEdit_3.text()))
-            self.lineEdit_3.setText('')
+            self.lineEdit_3.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                    "images_for_creator/error_icon.png"))
@@ -429,7 +441,7 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
     def setMaxDrop(self):
         try:
             self.count[1] = str(int(self.lineEdit_5.text()))
-            self.lineEdit_5.setText('')
+            self.lineEdit_5.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                     "images_for_creator/error_icon.png"))
@@ -438,7 +450,7 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
         drop = self.lineEdit.text()
         if ':' in drop:
             self.drop = drop
-            self.lineEdit.setText('')
+            self.lineEdit.setText('✔')
         else:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -471,8 +483,8 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
     def setCount(self):
         try:
             self.count = [str(int(self.lineEdit_3.text())), str(int(self.lineEdit_5.text()))]
-            self.lineEdit_3.setText('')
-            self.lineEdit_5.setText('')
+            self.lineEdit_3.setText('✔')
+            self.lineEdit_5.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -536,7 +548,6 @@ class Ui_MainWindow2(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_12.setFont(font)
-        self.label_12.setStyleSheet("")
         self.label_12.setTextFormat(QtCore.Qt.PlainText)
         self.label_12.setObjectName("label_12")
         self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
@@ -576,7 +587,6 @@ class Ui_MainWindow2(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_11.setFont(font)
-        self.label_11.setStyleSheet("")
         self.label_11.setTextFormat(QtCore.Qt.PlainText)
         self.label_11.setObjectName("label_11")
         self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
@@ -604,7 +614,6 @@ class Ui_MainWindow2(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_16.setFont(font)
-        self.label_16.setStyleSheet("")
         self.label_16.setTextFormat(QtCore.Qt.PlainText)
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
@@ -768,7 +777,7 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow2):
     def setProtection(self):
         try:
             self.protection = str(int(self.lineEdit_4.text()))
-            self.lineEdit_4.setText('')
+            self.lineEdit_4.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -778,9 +787,9 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow2):
         name = self.lineEdit_2.text()
         if US_text(name) and RUname != '':
             self.name = name
-            self.lineEdit.setText('')
+            self.lineEdit.setText('✔')
             self.RUname = RUname
-            self.lineEdit_2.setText('')
+            self.lineEdit_2.setText('✔')
         else:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -789,7 +798,7 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow2):
         model = self.Arm_line.text()
         if US_text(model) and model != '':
             self.modelname = model
-            self.Arm_line.setText('')
+            self.Arm_line.setText('✔')
         else:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -798,8 +807,8 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow2):
         try:
             self.materials.append(self.lineEdit_3.text())
             self.materials.append(str(int(self.lineEdit_5.text()) / 100))
-            self.lineEdit_3.setText('')
-            self.lineEdit_5.setText('')
+            self.lineEdit_3.setText('✔')
+            self.lineEdit_5.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -807,7 +816,7 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow2):
     def setMaxDurability(self):
         try:
             self.max_durability = str(int(self.lineEdit_6.text()))
-            self.lineEdit_6.setText('')
+            self.lineEdit_6.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -848,6 +857,9 @@ class Ui_MainWindow3(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1400, 30, 525, 395)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images_for_creator/icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
@@ -894,7 +906,6 @@ class Ui_MainWindow3(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_16.setFont(font)
-        self.label_16.setStyleSheet("")
         self.label_16.setTextFormat(QtCore.Qt.PlainText)
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
@@ -1023,8 +1034,8 @@ class Item(QtWidgets.QWidget, Ui_MainWindow3):
         if US_text(name) and name != '' and RUname != '':
             self.name = name
             self.RUname = RUname
-            self.lineEdit_2.setText('')
-            self.lineEdit.setText('')
+            self.lineEdit_2.setText('✔')
+            self.lineEdit.setText('✔')
         else:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1032,7 +1043,7 @@ class Item(QtWidgets.QWidget, Ui_MainWindow3):
     def setCount(self):
         try:
             self.count = str(int(self.lineEdit_3.text()))
-            self.lineEdit_3.setText('')
+            self.lineEdit_3.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1140,7 +1151,6 @@ class Ui_furnase(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_28.setFont(font)
-        self.label_28.setStyleSheet("")
         self.label_28.setTextFormat(QtCore.Qt.PlainText)
         self.label_28.setScaledContents(True)
         self.label_28.setObjectName("label_28")
@@ -1255,7 +1265,7 @@ class Furnace(QtWidgets.QWidget, Ui_furnase):
         adress = self.lineEdit_11.text()
         if US_text(adress):
             self.fileadress = self.project + '\\' + self.project + '\\recipes\\furnace\\' + adress
-            self.lineEdit_11.setText('')
+            self.lineEdit_11.setText('✔')
         else:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1264,7 +1274,7 @@ class Furnace(QtWidgets.QWidget, Ui_furnase):
         input_ = self.lineEdit_13.text()
         if US_text(input_) and ':' in input_:
             self.input_item = input_
-            self.lineEdit_13.setText('')
+            self.lineEdit_13.setText('✔')
         else:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1273,7 +1283,7 @@ class Furnace(QtWidgets.QWidget, Ui_furnase):
         output_ = self.lineEdit_12.text()
         if US_text(output_) and ':' in output_:
             self.output_item = output_
-            self.lineEdit_12.setText('')
+            self.lineEdit_12.setText('✔')
         else:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1281,7 +1291,7 @@ class Furnace(QtWidgets.QWidget, Ui_furnase):
     def setCount(self):
         try:
             self.count = str(int(self.lineEdit_14.text()))
-            self.lineEdit_14.setText('')
+            self.lineEdit_14.setText('✔')
         except ValueError:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1303,7 +1313,7 @@ class Ui_MainWindow4(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1080, 30, 837, 475)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap('images_for_creator/beef_cooked.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap('images_for_creator/icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         font = QtGui.QFont()
         font.setPointSize(8)
@@ -1649,8 +1659,8 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
         RUname = self.lineEdit.text()
         if US_text(name) and RUname != '':
             self.name = name
-            self.lineEdit.setText('')
-            self.lineEdit_2.setText('')
+            self.lineEdit.setText('✔')
+            self.lineEdit_2.setText('✔')
             self.RUname = RUname
         else:
             self.label_16.setPixmap(QtGui.QPixmap(
@@ -1659,7 +1669,7 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
     def setStackSize(self):
         try:
             self.stack_size = str(int(self.lineEdit_3.text()))
-            self.lineEdit_3.setText('')
+            self.lineEdit_3.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1688,7 +1698,7 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
     def setUseDuration(self):
         try:
             self.use_duration = str(int(self.lineEdit_4.text()))
-            self.lineEdit_4.setText('')
+            self.lineEdit_4.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1696,7 +1706,7 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
     def setNutrition(self):
         try:
             self.nutrition = str(int(self.lineEdit_5.text()))
-            self.lineEdit_5.setText('')
+            self.lineEdit_5.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1705,7 +1715,7 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
         saturation = self.lineEdit_6.text()
         if saturation in ['poor', 'low', 'normal', 'good', 'supernatural']:
             self.saturation = saturation
-            self.lineEdit_6.setText('')
+            self.lineEdit_6.setText('✔')
         else:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1723,7 +1733,7 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
         try:
             effect_test = [effect[0], str(int(effect[1])), str(int(effect[2]))]
             self.effects.append(effect_test)
-            self.lineEdit_7.setText('')
+            self.lineEdit_7.setText('✔')
         except IndexError or ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -1753,9 +1763,7 @@ class Ui_Verctak(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images_for_creator/crafting_table_top.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Verctak.setWindowIcon(icon)
-        Verctak.setAccessibleName("")
         Verctak.setAutoFillBackground(False)
-        Verctak.setWindowFilePath("")
         self.centralwidget = QtWidgets.QWidget(Verctak)
         self.centralwidget.setObjectName("centralwidget")
         self.setCountButton = QtWidgets.QPushButton(self.centralwidget)
@@ -1803,7 +1811,6 @@ class Ui_Verctak(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_28.setFont(font)
-        self.label_28.setStyleSheet("")
         self.label_28.setTextFormat(QtCore.Qt.PlainText)
         self.label_28.setScaledContents(True)
         self.label_28.setObjectName("label_28")
@@ -2030,7 +2037,7 @@ class CraftingTableCraft(QtWidgets.QWidget, Ui_Verctak):
         output_item = self.lineEdit_11.text()
         if ':' in output_item:
             self.output_item = output_item
-            self.lineEdit_11.setText('')
+            self.lineEdit_11.setText('✔')
         else:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "C:\\Users\\1\\PycharmProjects\\pythonProject1\\Project_yandeXXX\\images_for_creator/error_icon.png"))
@@ -2048,13 +2055,13 @@ class CraftingTableCraft(QtWidgets.QWidget, Ui_Verctak):
             for i in transkription:
                 key = i.split(' - ')
                 self.keys[key[0]] = key[1]
-            self.transcription.setText('')
+            self.transcription.setText('✔')
 
     def setName(self):
         name = self.lineEdit_10.text()
         if US_text(name):
             self.filename = name
-            self.lineEdit_10.setText('')
+            self.lineEdit_10.setText('✔')
         else:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2062,7 +2069,7 @@ class CraftingTableCraft(QtWidgets.QWidget, Ui_Verctak):
     def setCount(self):
         try:
             self.count = str(int(self.lineEdit_12.text()))
-            self.lineEdit_12.setText('')
+            self.lineEdit_12.setText('✔')
         except ValueError:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2079,15 +2086,15 @@ class CraftingTableCraft(QtWidgets.QWidget, Ui_Verctak):
             self.strings_of_craft[0] = '"' + ''.join(grid[:3]) + '"'
             self.strings_of_craft[1] = '"' + ''.join(grid[3:6]) + '"'
             self.strings_of_craft[2] = '"' + ''.join(grid[6:]) + '"'
-            self.lineEdit.setText('')
-            self.lineEdit_2.setText('')
-            self.lineEdit_3.setText('')
-            self.lineEdit_4.setText('')
-            self.lineEdit_5.setText('')
-            self.lineEdit_6.setText('')
-            self.lineEdit_7.setText('')
-            self.lineEdit_8.setText('')
-            self.lineEdit_9.setText('')
+            self.lineEdit.setText('✔')
+            self.lineEdit_2.setText('✔')
+            self.lineEdit_3.setText('✔')
+            self.lineEdit_4.setText('✔')
+            self.lineEdit_5.setText('✔')
+            self.lineEdit_6.setText('✔')
+            self.lineEdit_7.setText('✔')
+            self.lineEdit_8.setText('✔')
+            self.lineEdit_9.setText('✔')
         else:
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2112,7 +2119,7 @@ class Ui_MainWindow5(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1500, 30, 419, 292)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images_for_creator/block.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap('images_for_creator/icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -2224,11 +2231,11 @@ class Block(QtWidgets.QWidget, Ui_MainWindow5):
         name = self.lineEdit_2.text()
         if US_text(name):
             self.name = name
-            self.lineEdit_2.setText('')
+            self.lineEdit_2.setText('✔')
 
     def setRUname(self):
         self.RUname = self.lineEdit_4.text()
-        self.lineEdit_4.setText('')
+        self.lineEdit_4.setText('✔')
 
     def setImage(self):
         if self.name != None:
@@ -2289,7 +2296,6 @@ class Ui_MainWindow6(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_12.setFont(font)
-        self.label_12.setStyleSheet("")
         self.label_12.setTextFormat(QtCore.Qt.PlainText)
         self.label_12.setObjectName("label_12")
         self.label_11 = QtWidgets.QLabel(self.centralwidget)
@@ -2299,7 +2305,6 @@ class Ui_MainWindow6(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_11.setFont(font)
-        self.label_11.setStyleSheet("")
         self.label_11.setTextFormat(QtCore.Qt.PlainText)
         self.label_11.setObjectName("label_11")
         self.label_16 = QtWidgets.QLabel(self.centralwidget)
@@ -2309,7 +2314,6 @@ class Ui_MainWindow6(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_16.setFont(font)
-        self.label_16.setStyleSheet("")
         self.label_16.setTextFormat(QtCore.Qt.PlainText)
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
@@ -2505,7 +2509,7 @@ class Tools(QtWidgets.QWidget, Ui_MainWindow6):
     def setDamage(self):
         try:
             self.damage = str(int(self.lineEdit_4.text()))
-            self.lineEdit_4.setText('')
+            self.lineEdit_4.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2513,7 +2517,7 @@ class Tools(QtWidgets.QWidget, Ui_MainWindow6):
     def setDestroySpeed(self):
         try:
             self.destroy_speed = str(int(self.lineEdit_7.text()))
-            self.lineEdit_7.setText('')
+            self.lineEdit_7.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2521,15 +2525,15 @@ class Tools(QtWidgets.QWidget, Ui_MainWindow6):
     def setNames(self):
         self.name = self.lineEdit_8.text()
         self.RUname = self.lineEdit_9.text()
-        self.lineEdit_8.setText('')
-        self.lineEdit_9.setText('')
+        self.lineEdit_8.setText('✔')
+        self.lineEdit_9.setText('✔')
 
     def setMaterials(self):
         try:
             self.materials.append(self.lineEdit_3.text())
             self.materials.append(str(int(self.lineEdit_5.text()) / 100))
-            self.lineEdit_3.setText('')
-            self.lineEdit_5.setText('')
+            self.lineEdit_3.setText('✔')
+            self.lineEdit_5.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2537,7 +2541,7 @@ class Tools(QtWidgets.QWidget, Ui_MainWindow6):
     def setMaxDurability(self):
         try:
             self.max_durability = str(int(self.lineEdit_6.text()))
-            self.lineEdit_6.setText('')
+            self.lineEdit_6.setText('✔')
         except ValueError:
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
@@ -2571,12 +2575,6 @@ class Ui_MainWindow7(object):
         MainWindow.setWindowIcon(icon)
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1903, 971)
-        MainWindow.setWindowTitle("")
-        MainWindow.setToolTip("")
-        MainWindow.setStatusTip("")
-        MainWindow.setWhatsThis("")
-        MainWindow.setAccessibleName("")
-        MainWindow.setAccessibleDescription("")
         MainWindow.setAutoFillBackground(True)
         MainWindow.setStyleSheet("MainWindow::MainWindow(QWidget *parent) :\n"
 "QMainWindow(parent),\n"
@@ -2603,7 +2601,6 @@ class Ui_MainWindow7(object):
         icon.addPixmap(QtGui.QPixmap("images_for_creator/iron_sword_gamed.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
         self.pushButton.setIconSize(QtCore.QSize(128, 128))
-        self.pushButton.setShortcut("")
         self.pushButton.setAutoRepeat(False)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
@@ -2688,7 +2685,6 @@ class Ui_MainWindow7(object):
         icon7.addPixmap(QtGui.QPixmap("images_for_creator/helmet.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_8.setIcon(icon7)
         self.pushButton_8.setIconSize(QtCore.QSize(128, 128))
-        self.pushButton_8.setShortcut("")
         self.pushButton_8.setAutoRepeat(False)
         self.pushButton_8.setObjectName("pushButton_8")
         self.pushButton_9 = QtWidgets.QPushButton(self.centralwidget)
@@ -2712,7 +2708,6 @@ class Ui_MainWindow7(object):
         icon9.addPixmap(QtGui.QPixmap("images_for_creator/item_gamed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_11.setIcon(icon9)
         self.pushButton_11.setIconSize(QtCore.QSize(104, 104))
-        self.pushButton_11.setShortcut("")
         self.pushButton_11.setAutoRepeat(False)
         self.pushButton_11.setAutoRepeatDelay(100)
         self.pushButton_11.setAutoRepeatInterval(300)
@@ -2727,7 +2722,6 @@ class Ui_MainWindow7(object):
         icon10.addPixmap(QtGui.QPixmap("images_for_creator/block.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_12.setIcon(icon10)
         self.pushButton_12.setIconSize(QtCore.QSize(128, 128))
-        self.pushButton_12.setShortcut("")
         self.pushButton_12.setAutoRepeat(False)
         self.pushButton_12.setObjectName("pushButton_12")
         self.pushButton_13 = QtWidgets.QPushButton(self.centralwidget)
@@ -2740,7 +2734,6 @@ class Ui_MainWindow7(object):
         icon11.addPixmap(QtGui.QPixmap("images_for_creator/beef_gamed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_13.setIcon(icon11)
         self.pushButton_13.setIconSize(QtCore.QSize(128, 128))
-        self.pushButton_13.setShortcut("")
         self.pushButton_13.setAutoRepeat(False)
         self.pushButton_13.setObjectName("pushButton_13")
         self.pushButton_14 = QtWidgets.QPushButton(self.centralwidget)
@@ -2753,7 +2746,6 @@ class Ui_MainWindow7(object):
         icon12.addPixmap(QtGui.QPixmap("images_for_creator/ore.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_14.setIcon(icon12)
         self.pushButton_14.setIconSize(QtCore.QSize(128, 128))
-        self.pushButton_14.setShortcut("")
         self.pushButton_14.setAutoRepeat(False)
         self.pushButton_14.setObjectName("pushButton_14")
         self.pushButton_15 = QtWidgets.QPushButton(self.centralwidget)
@@ -2766,7 +2758,6 @@ class Ui_MainWindow7(object):
         icon13.addPixmap(QtGui.QPixmap("images_for_creator/crafting_table_top2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_15.setIcon(icon13)
         self.pushButton_15.setIconSize(QtCore.QSize(110, 110))
-        self.pushButton_15.setShortcut("")
         self.pushButton_15.setAutoRepeat(False)
         self.pushButton_15.setObjectName("pushButton_15")
         self.pushButton_16 = QtWidgets.QPushButton(self.centralwidget)
@@ -2779,7 +2770,6 @@ class Ui_MainWindow7(object):
         icon14.addPixmap(QtGui.QPixmap("images_for_creator/furnace2"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_16.setIcon(icon14)
         self.pushButton_16.setIconSize(QtCore.QSize(110, 110))
-        self.pushButton_16.setShortcut("")
         self.pushButton_16.setAutoRepeat(False)
         self.pushButton_16.setObjectName("pushButton_16")
         self.label.raise_()
@@ -2896,6 +2886,9 @@ class Ui_MainWindow8(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(300, 150)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images_for_creator/icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -5927,21 +5920,8 @@ def leggings_register(model_name, name, runame, project, materials, protection, 
     opened_file.close()
 
 
-def log_uncaught_exceptions(ex_cls, ex, tb):
-    text = '{}: {}:\n'.format(ex_cls.__name__, ex)
-
-    text += ''.join(traceback.format_tb(tb))
-
-    print(text)
-    QtWidgets.QMessageBox.critical(None, 'Error', text)
-
-    sys.exit()
-
-
-sys.excepthook = log_uncaught_exceptions
-
-
 def StyleSheet(br):
+    global GlobalStyleSheetButton
     styleSheet = GlobalStyleSheetButton
     styleSheet.insert(1, f"    border-radius: {br}px;\n")
     return ''.join(styleSheet)
