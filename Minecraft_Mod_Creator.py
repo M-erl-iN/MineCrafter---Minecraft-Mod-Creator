@@ -8,7 +8,6 @@
 #
 # WARNING: It is supported only on computers with files
 # of the * format.jpegs can be opened as a notepad.
-import time
 import uuid
 from os import mkdir
 from PyQt5 import QtCore, QtWidgets, QtGui
@@ -2926,6 +2925,65 @@ class Minecraft_Mod_Creator(QtWidgets.QWidget, Ui_MainWindow7):
     def setEat(self):
         self.exEat = Eat(self.project)
         self.exEat.show()
+
+
+class Ui_MainWindow8(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(300, 150)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(0, 0, 1940, 1091))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("images_for_creator/fone_for_project.jpg"))
+        self.label.setScaledContents(True)
+        self.label.setObjectName("label")
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label2 = QtWidgets.QLabel(self.centralwidget)
+        self.label2.setGeometry(QtCore.QRect(770, 350, 400, 100))
+        self.label2.setFont(font)
+        self.label2.setText("OPEN OR \nCREATE PROJECT")
+        self.label2.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label2.setObjectName("label2")
+        self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_10.setGeometry(QtCore.QRect(695, 250, 550, 200))  # + 655, + 215
+        self.pushButton_10.setStyleSheet(StyleSheet(16))
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(720, 280, 500, 54))
+        font = QtGui.QFont()
+        font.setPointSize(32)
+        font.setWeight(75)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setObjectName("lineEdit")
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Starting Menu"))
+
+
+class Start(QtWidgets.QWidget, Ui_MainWindow8):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.showMaximized()
+        self.pushButton_10.clicked.connect(self.CreateProject)
+
+    def CreateProject(self):
+        global app
+        text = self.lineEdit.text()
+        correct_project = US_text(text)
+        if text != None and correct_project and text != '':
+            start_project(text)
+            self.creating_mod = QtWidgets.QApplication(sys.argv)
+            self.start = Minecraft_Mod_Creator(text)
+            self.start.show()
 
 
 def US_text(text):
@@ -5944,65 +6002,6 @@ StyleLabel13 = ("QLabel{\n"
 "    border: 2px solid rgba(255, 255, 255, 255);\n"
 "    background-color: rgba(231, 231, 231, 80);\n"
 "}")
-
-
-class Ui_MainWindow8(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(300, 150)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 0, 1940, 1091))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("images_for_creator/fone_for_project.jpg"))
-        self.label.setScaledContents(True)
-        self.label.setObjectName("label")
-        font = QtGui.QFont()
-        font.setPointSize(25)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label2 = QtWidgets.QLabel(self.centralwidget)
-        self.label2.setGeometry(QtCore.QRect(115, 135, 400, 100))
-        self.label2.setFont(font)
-        self.label2.setText("OPEN OR \nCREATE PROJECT")
-        self.label2.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
-        self.label2.setObjectName("label2")
-        self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_10.setGeometry(QtCore.QRect(40, 35, 550, 200))
-        self.pushButton_10.setStyleSheet(StyleSheet(16))
-        self.pushButton_10.setObjectName("pushButton_10")
-        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(65, 65, 500, 54))
-        font = QtGui.QFont()
-        font.setPointSize(32)
-        font.setWeight(75)
-        self.lineEdit.setFont(font)
-        self.lineEdit.setObjectName("lineEdit")
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Starting Menu"))
-
-
-class Start(QtWidgets.QWidget, Ui_MainWindow8):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.showMaximized()
-        self.pushButton_10.clicked.connect(self.CreateProject)
-
-    def CreateProject(self):
-        global app
-        text = self.lineEdit.text()
-        correct_project = US_text(text)
-        if text != None and correct_project and text != '':
-            start_project(text)
-            self.creating_mod = QtWidgets.QApplication(sys.argv)
-            self.start = Minecraft_Mod_Creator(text)
-            self.start.show()
 
 
 if __name__ == '__main__':
