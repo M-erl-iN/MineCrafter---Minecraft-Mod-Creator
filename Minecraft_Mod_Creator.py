@@ -16,7 +16,7 @@ from PIL import Image
 import sys, traceback
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow1(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1056, 30, 860, 400)
@@ -276,7 +276,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_10.setFont(font)
-        self.pushButton_10.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_10.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_10.setObjectName("pushButton_10")
         self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_8.setGeometry(QtCore.QRect(70, 320, 241, 51))
@@ -372,7 +372,7 @@ class Ui_MainWindow(object):
         self.pushButton_8.setText(_translate("MainWindow", "Выбрать текстуру"))
 
 
-class Ore(QtWidgets.QWidget, Ui_MainWindow):
+class Ore(QtWidgets.QWidget, Ui_MainWindow1):
     def __init__(self, project):
         super().__init__()
         self.setupUi(self)
@@ -503,7 +503,7 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow):
                 "images_for_creator/complete_icon.png"))
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow2(object):
     def setupUi(self, MainWindow, title, image):
         MainWindow.setObjectName("MainWindow")
         icon = QtGui.QIcon()
@@ -633,7 +633,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_8.setFont(font)
-        self.pushButton_8.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_8.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_8.setObjectName("pushButton_8")
         self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_5.setGeometry(QtCore.QRect(670, 205, 61, 32))
@@ -749,7 +749,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "В системе:"))
 
 
-class Armor(QtWidgets.QWidget, Ui_MainWindow):
+class Armor(QtWidgets.QWidget, Ui_MainWindow2):
     def __init__(self, project, windowTitle, func, image):
         super().__init__()
         self.setupUi(self, windowTitle, image)
@@ -851,7 +851,7 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow):
                 "images_for_creator/complete_icon.png"))
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow3(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1400, 30, 525, 395)
@@ -892,7 +892,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_8.setFont(font)
-        self.pushButton_8.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_8.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_8.setObjectName("pushButton_8")
         self.label_16 = QtWidgets.QLabel(self.centralwidget)
         self.label_16.setGeometry(QtCore.QRect(430, 300, 71, 71))
@@ -1011,7 +1011,7 @@ class Ui_MainWindow(object):
         self.pushButton_7.setText(_translate("MainWindow", "Выбрать текстуру"))
 
 
-class Item(QtWidgets.QWidget, Ui_MainWindow):
+class Item(QtWidgets.QWidget, Ui_MainWindow3):
     def __init__(self, project):
         super().__init__()
         self.setupUi(self)
@@ -1130,7 +1130,7 @@ class Ui_furnase(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_13.setFont(font)
-        self.pushButton_13.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_13.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_13.setObjectName("pushButton_13")
         self.label_21 = QtWidgets.QLabel(self.centralwidget)
         self.label_21.setGeometry(QtCore.QRect(360, 90, 191, 81))
@@ -1310,7 +1310,7 @@ class Furnace(QtWidgets.QWidget, Ui_furnase):
                 "images_for_creator/complete_icon.png"))
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow4(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1080, 30, 837, 475)
@@ -1357,7 +1357,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_8.setFont(font)
-        self.pushButton_8.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_8.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_8.setObjectName("pushButton_8")
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(530, 60, 80, 30))
@@ -1634,7 +1634,7 @@ class Ui_MainWindow(object):
         self.pushButton_6.setText(_translate("MainWindow", "Задать"))
 
 
-class Eat(QtWidgets.QWidget, Ui_MainWindow):
+class Eat(QtWidgets.QWidget, Ui_MainWindow4):
     def __init__(self, project):
         super().__init__()
         self.setupUi(self)
@@ -1810,7 +1810,7 @@ class Ui_Verctak(object):
         font.setBold(True)
         font.setWeight(75)
         self.Func_button.setFont(font)
-        self.Func_button.setStyleSheet(*GlobalStyleSheetButton)
+        self.Func_button.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.Func_button.setObjectName("Func_button")
         self.label_28 = QtWidgets.QLabel(self.centralwidget)
         self.label_28.setGeometry(QtCore.QRect(460, 340, 120, 120))
@@ -2125,7 +2125,7 @@ class CraftingTableCraft(QtWidgets.QWidget, Ui_Verctak):
                 "images_for_creator/complete_icon.png"))
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow5(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(1500, 30, 419, 292)
@@ -2176,7 +2176,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_10.setFont(font)
-        self.pushButton_10.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_10.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_10.setObjectName("pushButton_10")
         self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_8.setGeometry(QtCore.QRect(5, 160, 241, 51))
@@ -2226,7 +2226,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "в системе:"))
 
 
-class Block(QtWidgets.QWidget, Ui_MainWindow):
+class Block(QtWidgets.QWidget, Ui_MainWindow5):
     def __init__(self, project):
         super().__init__()
         self.setupUi(self)
@@ -2269,7 +2269,7 @@ class Block(QtWidgets.QWidget, Ui_MainWindow):
             block_register(*variables)
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow6(object):
     def setupUi(self, MainWindow, title, image):
         MainWindow.setObjectName("MainWindow")
         icon = QtGui.QIcon()
@@ -2285,7 +2285,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_8.setFont(font)
-        self.pushButton_8.setStyleSheet(*GlobalStyleSheetButton)
+        self.pushButton_8.setStyleSheet(''.join(GlobalStyleSheetButton))
         self.pushButton_8.setObjectName("pushButton_8")
         self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_5.setGeometry(QtCore.QRect(280, 460, 61, 32))
@@ -2501,7 +2501,7 @@ class Ui_MainWindow(object):
         self.pushButton_10.setText(_translate("MainWindow", "Задать"))
 
 
-class Tools(QtWidgets.QWidget, Ui_MainWindow):
+class Tools(QtWidgets.QWidget, Ui_MainWindow6):
     def __init__(self, project, windowTitle, func, image):
         super().__init__()
         self.setupUi(self, windowTitle, image)
@@ -2585,7 +2585,7 @@ class Tools(QtWidgets.QWidget, Ui_MainWindow):
                 "images_for_creator/complete_icon.png"))
 
 
-class Ui_MainWindow1(object):
+class Ui_MainWindow7(object):
     def setupUi(self, MainWindow):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap('images_for_creator/title.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -2844,7 +2844,7 @@ class Ui_MainWindow1(object):
         MainWindow.setWindowTitle(_translate("MainWindow", '!Minecraft Mod Creator!'))
 
 
-class Minecraft_Mod_Creator(QtWidgets.QWidget, Ui_MainWindow1):
+class Minecraft_Mod_Creator(QtWidgets.QWidget, Ui_MainWindow7):
     def __init__(self, project):
         super().__init__()
         self.setupUi(self)
@@ -5922,7 +5922,7 @@ sys.excepthook = log_uncaught_exceptions
 def StyleSheet(br):
     styleSheet = GlobalStyleSheetButton
     styleSheet.insert(1, f"    border-radius: {br}px;\n")
-    return styleSheet
+    return ''.join(styleSheet)
 
 
 GlobalStyleSheetButton = ["QPushButton{\n",
@@ -5939,8 +5939,74 @@ GlobalStyleSheetButton = ["QPushButton{\n",
 "    border: 2px solid rgba(90, 140, 255, 255);\n",
 "    background-color: rgba(140, 170, 255, 120);\n"
 "}"]
-StyleLabel13 = ["QLabel{\n"
+StyleLabel13 = ("QLabel{\n"
 "    border-radius: 13px;\n"
 "    border: 2px solid rgba(255, 255, 255, 255);\n"
 "    background-color: rgba(231, 231, 231, 80);\n"
-"}"]
+"}")
+
+
+class Ui_MainWindow8(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(300, 150)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(0, 0, 1940, 1091))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("images_for_creator/fone_for_project.jpg"))
+        self.label.setScaledContents(True)
+        self.label.setObjectName("label")
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label2 = QtWidgets.QLabel(self.centralwidget)
+        self.label2.setGeometry(QtCore.QRect(115, 135, 400, 100))
+        self.label2.setFont(font)
+        self.label2.setText("OPEN OR \nCREATE PROJECT")
+        self.label2.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label2.setObjectName("label2")
+        self.pushButton_10 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_10.setGeometry(QtCore.QRect(40, 35, 550, 200))
+        self.pushButton_10.setStyleSheet(StyleSheet(16))
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(65, 65, 500, 54))
+        font = QtGui.QFont()
+        font.setPointSize(32)
+        font.setWeight(75)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setObjectName("lineEdit")
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Starting Menu"))
+
+
+class Start(QtWidgets.QWidget, Ui_MainWindow8):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.showMaximized()
+        self.pushButton_10.clicked.connect(self.CreateProject)
+
+    def CreateProject(self):
+        global app
+        text = self.lineEdit.text()
+        correct_project = US_text(text)
+        if text != None and correct_project and text != '':
+            start_project(text)
+            self.creating_mod = QtWidgets.QApplication(sys.argv)
+            self.start = Minecraft_Mod_Creator(text)
+            self.start.show()
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    ex = Start()
+    ex.show()
+    sys.exit(app.exec())
