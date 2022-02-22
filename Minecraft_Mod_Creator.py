@@ -1020,7 +1020,7 @@ class Item(QtWidgets.QWidget, Ui_MainWindow3):
         self.RUname = None
         self.count = None
         self.corr_im = True
-        self.is_foil = True
+        self.is_foil = False
         self.project = project
         self.pushButton_9.clicked.connect(self.names)
         self.pushButton_10.clicked.connect(self.setCount)
@@ -2957,7 +2957,7 @@ def uuid_generate():
 
 
 def start_project(project):
-    test_project = open('projects.txt', 'r')
+    test_project = open('projects.mmc', 'r')
     test_lines = list(map(lambda x: x[:-1], test_project.readlines()))
     test_project.close()
     if project not in test_lines:
@@ -3062,11 +3062,11 @@ def start_project(project):
         pack_icon = Image.open('images_for_creator\\icon.png')
         pack_icon.save(project + '\\pack_icon.png')
         pack_icon.save(project + '(r)\\pack_icon.png')
-        projects_txt = open('projects.txt', 'r')
+        projects_txt = open('projects.mmc', 'r')
         projects = projects_txt.readlines()
         projects.append(project_for_projects + '\n')
         projects_txt.close()
-        projects_lines = open('projects.txt', 'w')
+        projects_lines = open('projects.mmc', 'w')
         projects_lines.writelines(projects)
 
 
@@ -3316,7 +3316,7 @@ def ore_register(name, runame, project, drop, spawn_in_world, biomes, count, sou
         opened_file = open(adress + '/features/' + name + '_feature.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
     reg_in_terrains(adress, name, project, sound)
 
 
@@ -3377,7 +3377,7 @@ def block_register(name, runame, project, destroy='0.5'):
         opened_file = open(adress + '/loot_tables/blocks/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
     reg_in_terrains(adress, name, project, 'stone')
     translate_in_game(name, runame, project)
 
@@ -3442,7 +3442,7 @@ def item_register(name, runame, project, max_stack_size, foil):
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
 def eat_register(name, runame, max_stack_size, use_duration, foil,
@@ -3504,7 +3504,7 @@ def eat_register(name, runame, max_stack_size, use_duration, foil,
         opened_file = open(adress + '\\items\\' + name + '.json', 'w')
     opened_file.writelines(lines)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
 def translate_in_game(name, gamename, project):
@@ -3624,11 +3624,14 @@ def sword_register(name, runame, project, materials, damage, max_durability, des
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
-def reg_in_items(adress, name):
-    test_item = open('items.txt', 'r')
+def reg_in_items(adress, name, project):
+    try:
+        test_item = open(f'items_{project}.mmc', 'r')
+    except FileNotFoundError:
+        test_item = open(f'items_{project}.mmc', 'x')
     list_ = list(map(lambda x: x[:-1], test_item.readlines()))
     if name not in list_:
         opened_file = open(adress + '(r)/textures/item_texture.json', 'r')
@@ -3644,13 +3647,16 @@ def reg_in_items(adress, name):
         opened_file.close()
         list_.append(name)
         test_item.close()
-        test_item = open('items.txt', 'w')
+        test_item = open(f'items_{project}.mmc', 'w')
         test_item.writelines(list(map(lambda x: x + '\n', list_)))
 
 
 
 def reg_in_terrains(adress, name, project, sound):
-    test_item = open('terrains.txt', 'r')
+    try:
+        test_item = open(f'terrains_{project}.mmc', 'r')
+    except FileNotFoundError:
+        test_item = open(f'terrains_{project}.mmc', 'x')
     list_ = list(map(lambda x: x[:-1], test_item.readlines()))
     if name not in list_:
         opened_file = open(adress + '(r)/textures/terrain_texture.json', 'r')
@@ -3674,7 +3680,7 @@ def reg_in_terrains(adress, name, project, sound):
         opened_file.close()
         list_.append(name)
         test_item.close()
-        test_item = open('terrains.txt', 'w')
+        test_item = open(f'terrains_{project}.mmc', 'w')
         test_item.writelines(list(map(lambda x: x + '\n', list_)))
 
 
@@ -4725,7 +4731,7 @@ def pickaxe_register(name, runame, project, materials, damage, max_durability, d
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
 def shovel_register(name, runame, project, materials, damage, max_durability, destroy_speed):
@@ -4852,7 +4858,7 @@ def shovel_register(name, runame, project, materials, damage, max_durability, de
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
 def axe_register(name, runame, project, materials, damage, max_durability, destroy_speed):
@@ -5154,7 +5160,7 @@ def axe_register(name, runame, project, materials, damage, max_durability, destr
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
 def hoe_register(name, runame, project, materials, damage, max_durability, destroy_speed):
@@ -5307,7 +5313,7 @@ def hoe_register(name, runame, project, materials, damage, max_durability, destr
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
 
 def boots_register(model_name, name, runame, project, materials, protection, max_durability):
@@ -5398,7 +5404,7 @@ def boots_register(model_name, name, runame, project, materials, protection, max
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
     except FileExistsError:
@@ -5555,7 +5561,7 @@ def chestplate_register(model_name, name, runame, project, materials, protection
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
     except FileExistsError:
@@ -5705,7 +5711,7 @@ def helmet_register(model_name, name, runame, project, materials, protection, ma
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
@@ -5856,7 +5862,7 @@ def leggings_register(model_name, name, runame, project, materials, protection, 
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name)
+    reg_in_items(adress, name, project)
 
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
@@ -5948,8 +5954,12 @@ StyleLabel13 = ("QLabel{\n"
 "}")
 
 
-if __name__ == '__main__':
+def main():
     app = QtWidgets.QApplication(sys.argv)
     ex = Start()
     ex.show()
     sys.exit(app.exec())
+
+
+if __name__ == '__main__':
+    main()
