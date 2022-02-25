@@ -1,18 +1,12 @@
-# -*- coding: utf-8 -*-
-#
-# Created by: Muracaev Erlan Ruslanovich
-#
-# The first global project of this author
-#
-# The latest versions of Minecraft BE are supported.
-#
-# WARNING: It is supported only on computers with files
-# of the * format.jpeg-s can be opened as a notepad.
-import uuid
+""" -*- coding: utf-8 -*-
+ Created by: Muracaev Erlan Ruslanovich
+ The first global project of this author
+ The latest versions of Minecraft BE are supported."""
+
 from os import mkdir
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PIL import Image
-import sys, traceback
+import sys, traceback, csv, uuid
 
 
 def log_uncaught_exceptions(ex_cls, ex, tb):
@@ -505,9 +499,14 @@ class Ore(QtWidgets.QWidget, Ui_MainWindow1):
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            ore_register(*variables)
-            self.label_16.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                ore_register(*variables)
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_2.setText("replica")
 
 
 class Ui_MainWindow2(object):
@@ -848,9 +847,14 @@ class Armor(QtWidgets.QWidget, Ui_MainWindow2):
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            self.func(*variables)
-            self.label_16.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                self.func(*variables)
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit.setText("replica")
 
 
 class Ui_MainWindow3(object):
@@ -1077,9 +1081,14 @@ class Item(QtWidgets.QWidget, Ui_MainWindow3):
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            item_register(*variables)
-            self.label_16.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                item_register(*variables)
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_2.setText("replica")
 
 class Ui_furnase(object):
     def setupUi(self, furnase):
@@ -1303,9 +1312,14 @@ class Furnace(QtWidgets.QWidget, Ui_furnase):
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            self.func(*variables)
-            self.label_28.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                self.func(*variables)
+                self.label_28.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_11.setText("replica")
 
 
 class Ui_MainWindow4(object):
@@ -1745,9 +1759,14 @@ class Eat(QtWidgets.QWidget, Ui_MainWindow4):
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            eat_register(*variables)
-            self.label_16.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                eat_register(*variables)
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_2.setText("replica")
 
 
 class Ui_Verctak(object):
@@ -2109,9 +2128,14 @@ class CraftingTableCraft(QtWidgets.QWidget, Ui_Verctak):
             self.label_28.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            crafting_table_recipe_register(*variables)
-            self.label_28.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                crafting_table_recipe_register(*variables)
+                self.label_28.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_11.setText("replica")
 
 
 class Ui_MainWindow5(object):
@@ -2254,7 +2278,12 @@ class Block(QtWidgets.QWidget, Ui_MainWindow5):
         except AttributeError:
             test = False
         if None not in variables and test:
-            block_register(*variables)
+            try:
+                block_register(*variables)
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_2.setText("replica")
 
 
 class Ui_MainWindow6(object):
@@ -2563,9 +2592,14 @@ class Tools(QtWidgets.QWidget, Ui_MainWindow6):
             self.label_16.setPixmap(QtGui.QPixmap(
                 "images_for_creator/error_icon.png"))
         else:
-            self.func(*variables)
-            self.label_16.setPixmap(QtGui.QPixmap(
-                "images_for_creator/complete_icon.png"))
+            try:
+                self.func(*variables)
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/complete_icon.png"))
+            except Exception:
+                self.label_16.setPixmap(QtGui.QPixmap(
+                    "images_for_creator/error_icon.png"))
+                self.lineEdit_8.setText("replica")
 
 
 class Ui_MainWindow7(object):
@@ -2957,9 +2991,11 @@ def uuid_generate():
 
 
 def start_project(project):
-    test_project = open('projects.mmc', 'r')
-    test_lines = list(map(lambda x: x[:-1], test_project.readlines()))
-    test_project.close()
+    test_lines = []
+    with open('userprojects.csv') as test_project:
+        reader = csv.reader(test_project, delimiter=';', quotechar='"')
+        for ind, items in enumerate(reader):
+            test_lines.append(items[0])
     if project not in test_lines:
         mkdir(project)
         project_for_projects = project
@@ -3062,12 +3098,10 @@ def start_project(project):
         pack_icon = Image.open('images_for_creator\\icon.png')
         pack_icon.save(project + '\\pack_icon.png')
         pack_icon.save(project + '(r)\\pack_icon.png')
-        projects_txt = open('projects.mmc', 'r')
-        projects = projects_txt.readlines()
-        projects.append(project_for_projects + '\n')
-        projects_txt.close()
-        projects_lines = open('projects.mmc', 'w')
-        projects_lines.writelines(projects)
+        with open('userprojects.csv', 'a', newline='', encoding='utf8') as csvfile:
+            writer = csv.writer(
+                csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow([project_for_projects])
 
 
 def register_in_functions(name, project):
@@ -3170,6 +3204,8 @@ def biome_register(biome, spawn_in_world, name, project):
 
 def ore_register(name, runame, project, drop, spawn_in_world, biomes, count, sound, destroy='0.5'):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
+    reg_in_terrains(adress, name, project, sound)
     lines_of_file = ['{\n',
                      '  "format_version": "1.16.0",\n',
                      '  "minecraft:block": {\n',
@@ -3316,12 +3352,12 @@ def ore_register(name, runame, project, drop, spawn_in_world, biomes, count, sou
         opened_file = open(adress + '/features/' + name + '_feature.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name, project)
-    reg_in_terrains(adress, name, project, sound)
 
 
 def block_register(name, runame, project, destroy='0.5'):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
+    reg_in_terrains(adress, name, project)
     lines_of_file = ['{\n',
                      '  "format_version": "1.16.0",\n',
                      '  "minecraft:block": {\n',
@@ -3377,13 +3413,12 @@ def block_register(name, runame, project, destroy='0.5'):
         opened_file = open(adress + '/loot_tables/blocks/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name, project)
-    reg_in_terrains(adress, name, project, 'stone')
     translate_in_game(name, runame, project)
 
 
 def item_register(name, runame, project, max_stack_size, foil):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     lines_of_file = ['{\n',
                      '  "format_version": "1.16.100",\n',
@@ -3442,12 +3477,12 @@ def item_register(name, runame, project, max_stack_size, foil):
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name, project)
 
 
 def eat_register(name, runame, max_stack_size, use_duration, foil,
                  nutrition, saturation, can_always_eat, effects, project):
     adress = project + '\\' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     translate_in_game(name, runame, project)
     lines = ['{\n',
@@ -3504,7 +3539,6 @@ def eat_register(name, runame, max_stack_size, use_duration, foil,
         opened_file = open(adress + '\\items\\' + name + '.json', 'w')
     opened_file.writelines(lines)
     opened_file.close()
-    reg_in_items(adress, name, project)
 
 
 def translate_in_game(name, gamename, project):
@@ -3517,6 +3551,7 @@ def translate_in_game(name, gamename, project):
 
 def sword_register(name, runame, project, materials, damage, max_durability, destroy_speed):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     try:
         opened_file = open(adress + '/items/' + name + '.json', 'x')
@@ -3624,15 +3659,17 @@ def sword_register(name, runame, project, materials, damage, max_durability, des
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name, project)
 
 
 def reg_in_items(adress, name, project):
-    try:
-        test_item = open(f'items_{project}.mmc', 'r')
-    except FileNotFoundError:
-        test_item = open(f'items_{project}.mmc', 'x')
-    list_ = list(map(lambda x: x[:-1], test_item.readlines()))
+    list_ = []
+    with open('userprojects.csv') as test_project:
+        reader = csv.reader(test_project, delimiter=';', quotechar='"')
+        for ind, items in enumerate(reader):
+            if items[0] == project:
+                list_ = items.copy()
+                ind2 = ind
+                break
     if name not in list_:
         opened_file = open(adress + '(r)/textures/item_texture.json', 'r')
         test = ''
@@ -3645,19 +3682,32 @@ def reg_in_items(adress, name, project):
         opened_file = open(adress + '(r)/textures/item_texture.json', 'w')
         opened_file.write(lines_of_file)
         opened_file.close()
+        list_1_ = []
+        with open('userprojects.csv') as test_project:
+            reader = csv.reader(test_project, delimiter=';', quotechar='"')
+            for ind, items in enumerate(reader):
+                list_1_.append(items)
         list_.append(name)
-        test_item.close()
-        test_item = open(f'items_{project}.mmc', 'w')
-        test_item.writelines(list(map(lambda x: x + '\n', list_)))
+        list_1_[ind2] = list_
+        with open('userprojects.csv', 'w', newline='', encoding='utf8') as csvfile:
+            writer = csv.writer(
+                csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            for i in list_1_:
+                writer.writerow(i)
+    else:
+        raise Exception
 
 
-
-def reg_in_terrains(adress, name, project, sound):
-    try:
-        test_item = open(f'terrains_{project}.mmc', 'r')
-    except FileNotFoundError:
-        test_item = open(f'terrains_{project}.mmc', 'x')
-    list_ = list(map(lambda x: x[:-1], test_item.readlines()))
+def reg_in_terrains(adress, name, project, sound='stone'):
+    list_ = []
+    with open('userprojects.csv') as test_project:
+        reader = csv.reader(test_project, delimiter=';', quotechar='"')
+        for ind, items in enumerate(reader):
+            if items[0] == project:
+                list_ = items.copy()
+                ind2 = ind
+                break
+    name += '_TeRrAiNs'
     if name not in list_:
         opened_file = open(adress + '(r)/textures/terrain_texture.json', 'r')
         test = ''
@@ -3678,14 +3728,23 @@ def reg_in_terrains(adress, name, project, sound):
         opened_file = open(adress + '(r)/blocks.json', 'w')
         opened_file.write(lines_of_file)
         opened_file.close()
+        list_1_ = []
+        with open('userprojects.csv') as test_project:
+            reader = csv.reader(test_project, delimiter=';', quotechar='"')
+            for ind, items in enumerate(reader):
+                list_1_.append(items)
         list_.append(name)
-        test_item.close()
-        test_item = open(f'terrains_{project}.mmc', 'w')
-        test_item.writelines(list(map(lambda x: x + '\n', list_)))
+        list_1_[ind2] = list_
+        with open('userprojects.csv', 'w', newline='', encoding='utf8') as csvfile:
+            writer = csv.writer(
+                csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            for i in list_1_:
+                writer.writerow(i)
 
 
 def pickaxe_register(name, runame, project, materials, damage, max_durability, destroy_speed):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     try:
         opened_file = open(adress + '/items/' + name + '.json', 'x')
@@ -4731,11 +4790,11 @@ def pickaxe_register(name, runame, project, materials, damage, max_durability, d
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name, project)
 
 
 def shovel_register(name, runame, project, materials, damage, max_durability, destroy_speed):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     try:
         opened_file = open(adress + '/items/' + name + '.json', 'x')
@@ -4858,11 +4917,11 @@ def shovel_register(name, runame, project, materials, damage, max_durability, de
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name, project)
 
 
 def axe_register(name, runame, project, materials, damage, max_durability, destroy_speed):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     try:
         opened_file = open(adress + '/items/' + name + '.json', 'x')
@@ -5160,11 +5219,11 @@ def axe_register(name, runame, project, materials, damage, max_durability, destr
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name, project)
 
 
 def hoe_register(name, runame, project, materials, damage, max_durability, destroy_speed):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     try:
         opened_file = open(adress + '/items/' + name + '.json', 'x')
@@ -5313,11 +5372,11 @@ def hoe_register(name, runame, project, materials, damage, max_durability, destr
     opened_file.writelines(lines_of_file)
     opened_file.close()
     translate_in_game(name, runame, project)
-    reg_in_items(adress, name, project)
 
 
 def boots_register(model_name, name, runame, project, materials, protection, max_durability):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     translate_in_game(name, runame, project)
     try:
@@ -5404,7 +5463,6 @@ def boots_register(model_name, name, runame, project, materials, protection, max
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name, project)
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
     except FileExistsError:
@@ -5475,6 +5533,7 @@ def boots_register(model_name, name, runame, project, materials, protection, max
 
 def chestplate_register(model_name, name, runame, project, materials, protection, max_durability):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     translate_in_game(name, runame, project)
     try:
@@ -5561,7 +5620,6 @@ def chestplate_register(model_name, name, runame, project, materials, protection
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name, project)
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
     except FileExistsError:
@@ -5626,6 +5684,7 @@ def chestplate_register(model_name, name, runame, project, materials, protection
 
 def helmet_register(model_name, name, runame, project, materials, protection, max_durability):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     translate_in_game(name, runame, project)
     try:
@@ -5711,8 +5770,6 @@ def helmet_register(model_name, name, runame, project, materials, protection, ma
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name, project)
-
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
     except FileExistsError:
@@ -5776,6 +5833,7 @@ def helmet_register(model_name, name, runame, project, materials, protection, ma
 
 def leggings_register(model_name, name, runame, project, materials, protection, max_durability):
     adress = project + '/' + project
+    reg_in_items(adress, name, project)
     register_in_functions(name, project)
     translate_in_game(name, runame, project)
     try:
@@ -5862,8 +5920,6 @@ def leggings_register(model_name, name, runame, project, materials, protection, 
         opened_file = open(adress + '(r)/items/' + name + '.json', 'w')
     opened_file.writelines(lines_of_file)
     opened_file.close()
-    reg_in_items(adress, name, project)
-
     try:
         opened_file = open(adress + '(r)/attachables/' + name + '.json', 'x')
     except FileExistsError:
