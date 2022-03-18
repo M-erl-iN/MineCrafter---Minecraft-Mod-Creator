@@ -6011,10 +6011,10 @@ StyleLabel13 = ("QLabel{\n"
 
 
 def main():
-    app = QtWidgets.QApplication(sys.argv)
+    app1 = QtWidgets.QApplication(sys.argv)
     ex = Start()
     ex.show()
-    sys.exit(app.exec())
+    sys.exit(app1.exec())
 
 
 if __name__ == '__main__':
